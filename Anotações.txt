@@ -1,0 +1,70 @@
+Ruby on Rails 2020_003 Aula 2 MODEL
+
+Aqui depois da instalação do mysql vamos trabalhar com os models
+Para criar um model vamos executar o seguinte comando:
+
+rails g model Produto name code price:float
+
+g = generate
+Gera o modelo Produto no projeto com os campos especificados separados
+por espaço. O tipo padrão é string, por esse motivo somente o price foi
+tipificado.
+
+Ele cria arquivos para o desenvolvimento e para o teste:
+  invoke  active_record
+  create    db/migrate/20231101082620_create_produtos.rb
+  create    app/models/produto.rb
+  invoke    test_unit
+  create      test/models/produto_test.rb
+  create      test/fixtures/produtos.yml
+
+Quando se cria o model o rails já cria um objeto migration
+para fazer a configuração da base de dados para que o 
+objeto já interaja com o BD.
+
+CONFIGURANDO O MYSQL
+
+O rails já vem com a configuração padrão do SqlLite então faremos agora
+a configuração do Mysql.
+
+Essa configuração é feita no arquivo config/database.yml
+Vamos substituir essa configuração pela configuração do mysql2
+
+Basicamente mudando o adapter do sqlite3 para o mysql. Por isso devemos adicinar uma nova
+gem do mysql2 para que possamos fazer a conexão do banco de dados.
+
+INSTALANDO A GEM DO MYSQL
+
+No arquivo Gemfile vamos adicionar a gem do mysql2
+gem 'mysql2'
+Uma vez adicionada o comando da gem dentro desse arquivo vamos rodar o comando
+bundle install
+OBS: Estava faltando a lib de desenvolvimento do mysql que foi instalada com:
+sudo apt-get install libmysqlclient-dev
+
+RAKE
+
+Realiza diversas tarefas.  rake -T
+Uma das tarefas é o:
+  rake db:migrate 
+    gera o arquivo schema.rb que possui os detalhes dos campos criados em model. 
+    Esse arquivo basicamente cria a tabela produtos no BD especificado no arquivo database.yml
+ rake db:setup
+    configura o BD criando o database e as respectivas tabelas, no nosso caso de exemplo (produtos)
+
+Caso tenhamos criado erroneamente, podemos fazer alteraçoes por meio do rake.
+  rake db:rollback
+    roda o esquema para o estado anterior.
+
+Ainda não temos os VIEWS nem CONTROLLERS, temos somente o MODEL. Para testar isso podemos usar o
+  rails c
+    carrega a aplicação rails para acessar via console
+
+Aqui dentro ele abre um irb onde podemos ter acesso à classe Produtos. Podemos criar uma nova
+instancia de Produto (p = Produto.new) e adicionarmos os seus atributos.
+Criei então um produto celular do google com um valor.
+
+A própria classe tem um método para salvar os dados no banco de dados.
+  p.save
+
+Assim ele já salva os dados do objeto no banco de dados.
