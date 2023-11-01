@@ -68,3 +68,38 @@ A própria classe tem um método para salvar os dados no banco de dados.
   p.save
 
 Assim ele já salva os dados do objeto no banco de dados.
+
+
+#####  Ruby on Rails 2020_003 Aula 2 Criando CONTROLLERS ######
+
+Controller é responsável por capturar uma informação do model e renderizar na VIEW apropriada.
+
+Usaremos um generator via rails g de produtos.
+  rails g controller Produtos index
+Vai criar uma série de arquivos relacionado ao controller
+      create  app/controllers/produtos_controller.rb
+       route  get 'produtos/index'
+      invoke  erb
+      create    app/views/produtos
+      create    app/views/produtos/index.html.erb
+      invoke  test_unit
+      create    test/controllers/produtos_controller_test.rb
+      invoke  helper
+      create    app/helpers/produtos_helper.rb
+      invoke    test_unit
+
+o app/controllers/produtos_controller.rb é a classe.
+também criou uma rota  lá em config/routes
+
+o comando render faz a renderização do que for passado pra ele. Faremos um teste nesse arquivo citado
+
+é uma classe ProdutosController que herda de ApplicationController com um método index
+nesse método vamos fazer a renderização como teste
+render plain: "Retornado pela action index do controller produto'
+  (no curso ele passa render text:, mas não renderizou e procurando no chatgpt ele sugeriu plain)
+Após essa inserção vamos rodar o servidor 
+  rails s
+Acessamos
+http://localhost:3000/produtos/index (veremos rotas e views mais a frente)
+
+#####  Ruby on Rails 2020_003 Aula 2 Criando VIEWS ######
