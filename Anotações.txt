@@ -103,3 +103,30 @@ Acessamos
 http://localhost:3000/produtos/index (veremos rotas e views mais a frente)
 
 #####  Ruby on Rails 2020_003 Aula 2 Criando VIEWS ######
+
+Dessa vez usaremos o comando:
+rails g scaffold Produto name code price:float --force
+
+Esse comando vai criar o mvc completo solicitado. Como anteriormente já 
+tinhamos criado o controller, usamos o --force para forçar a configuração
+
+Esse comando já gera o MVC completo incluindo uma rota para o produto com
+o respectivo CRUD.
+
+Dentro da view/layout/application.html teremos uma palavra reservada yield
+essa palavra chama o que será rendedizado, no nosso caso o produtos/index.html
+Esses arquivos tem a extensão erb que significa ebbeded ruby, ou seja, conseguimos
+colocar código ruby dentro do html.
+Nesses arquivos faz-se a inserção do código ruby com <%...%> ou <%=...%> onde no segundo
+com = só imprime os valores e os sem = são códigos normais.
+
+PARTIALS
+A view permite inserção de outras views, exemplo a view new.html.erb possui dentro
+dela a renderização de outra view, a form <% render 'form' %> essa view de form
+é uma partial. Essa mesma partial é usada no cenário de edição e inclusão de um novo produto
+
+Toda essa criação pode ser explicada com mais riqueza em:
+https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application
+Documentação oficial do Ruby on Rails.
+
+Ruby on Rails 2020_003 Aula 2 routes
