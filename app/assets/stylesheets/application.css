@@ -10,6 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= 
+ *= 
  */
+require_tree .require_self body {
+  background-color: red;
+}
+
+.gray-row {
+  background-color: #bccacf;
+  border: medium dashed green;
+}
+
+.normal-row {
+  background-color: none;
+  border: medium dashed rgb(22, 33, 129);
+}

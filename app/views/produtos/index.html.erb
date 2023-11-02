@@ -3,11 +3,15 @@
 <h1>Produtos</h1>
 
 <div id="produtos">
-  <% @produtos.each do |produto| %>
-    <%= render produto %>
-    <p>
-      <%= link_to "Show this produto", produto %>
-    </p>
+
+  <% @produtos.each_with_index do |produto, index| %>
+    
+    <div class=<%= css_for(index)%>>
+      <%= render produto %>
+      <p>
+        <%= link_to "Show this produto", produto %>
+      </p>
+    </div>
   <% end %>
 </div>
 

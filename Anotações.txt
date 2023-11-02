@@ -28,7 +28,8 @@ O rails já vem com a configuração padrão do SqlLite então faremos agora
 a configuração do Mysql.
 
 Essa configuração é feita no arquivo config/database.yml
-Vamos substituir essa configuração pela configuração do mysql2
+
+IMPORTANTE: Vamos substituir essa configuração pela configuração do mysql2
 
 Basicamente mudando o adapter do sqlite3 para o mysql. Por isso devemos adicinar uma nova
 gem do mysql2 para que possamos fazer a conexão do banco de dados.
@@ -46,12 +47,13 @@ RAKE
 
 Realiza diversas tarefas.  rake -T
 Uma das tarefas é o:
+    rake db:setup
+    configura o BD criando o database e as respectivas tabelas, no nosso caso de exemplo (produtos)
+
   rake db:migrate 
     gera o arquivo schema.rb que possui os detalhes dos campos criados em model. 
     Esse arquivo basicamente cria a tabela produtos no BD especificado no arquivo database.yml
- rake db:setup
-    configura o BD criando o database e as respectivas tabelas, no nosso caso de exemplo (produtos)
-
+ 
 Caso tenhamos criado erroneamente, podemos fazer alteraçoes por meio do rake.
   rake db:rollback
     roda o esquema para o estado anterior.
@@ -104,8 +106,8 @@ http://localhost:3000/produtos/index (veremos rotas e views mais a frente)
 
 #####  Ruby on Rails 2020_003 Aula 2 Criando VIEWS ######
 
-Dessa vez usaremos o comando:
-rails g scaffold Produto name code price:float --force
+IMPORTANTE: Dessa vez usaremos o comando:
+    rails g scaffold Produto name code price:float --force
 
 Esse comando vai criar o mvc completo solicitado. Como anteriormente já 
 tinhamos criado o controller, usamos o --force para forçar a configuração
@@ -130,3 +132,35 @@ https://guides.rubyonrails.org/getting_started.html#creating-the-blog-applicatio
 Documentação oficial do Ruby on Rails.
 
 Ruby on Rails 2020_003 Aula 2 routes
+
+Acima nós fizemos a criação do MVC e nele inclui-se as rotas.
+essas rotas podem ser verificadas em config/locales/routes.rb
+lá temos resources :produtos. Não temos as rotas específicas. Para essa verificação
+podemos usar o comando 
+  rake routes
+
+
+---------
+
+Ruby on Rails 2020_003 Aula 2 Alterano o estilo via CSS
+
+Aqui vamos alterar o estilo da página de listagem dos produtos.
+
+Será alterado o arquivo correspondente ao controler dentro da pasta stylesheets.
+(nessa versão não foi criado o arquivo assets/stylesheets/produtos.scss, então temporariamente as alterações css estão sendo
+feitas em app/assets/stylesheets/application.css)
+
+Dentro do arquivo app/views/produtos/index.html.erb podemos ver a listagem dos produtos, então alteramos o nome da classe de cada 
+produto listado de acordo com o seu index.
+Para isso podemos usar uma função que verifica se o index é par ou impar. Essa função pode ficar dentro do próprio arquivo mas poluiria 
+o arquivo. Então podemos usar o helper app/helpers/produtos_helper.rb. Aqui temos um module onde podemos adicionar métodos que serão usados
+no arquivo index.html do produtos.
+
+Criamos um método e chamamos ele no nome da classe de cada produto listado.
+  def css_for(index)
+    index.even? ? 'normal-row' : 'gray-row'
+  end
+
+chamando no index.html
+  <div class=<%= css_for(index)%>>
+
